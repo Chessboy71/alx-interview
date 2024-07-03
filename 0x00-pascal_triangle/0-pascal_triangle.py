@@ -1,23 +1,54 @@
 #!/usr/bin/python3
-'''Module to return pascal triangle'''
+import time
+
+memo = {}
 
 
 def pascal_triangle(n):
-    '''
-    Pascal's triangle
+    """Pascal Triangle
+
     Args:
-      n (int): The number of rows of the triangle
-    Returns:
-      List of lists of integers representing the Pascal’s triangle
-    '''
-    lists = []
-    if n == 0:
-        return lists
+        n (int): The number of lists
+    """
+    pascal = []
     for i in range(n):
-        lists.append([])
-        lists[i].append(1)
-        if (i > 0):
-            for j in range(1, i):
-                lists[i].append(lists[i - 1][j - 1] + lists[i - 1][j])
-            lists[i].append(1)
-    return lists
+        newL = []
+        for j in range(i+1):
+            element = binomanial(i, j)
+            newL.append(element)
+        pascal.append(newL)
+    return pascal
+
+
+def factorialMemo(n):
+    if n in memo:
+        return memo[n]
+    if n == 0:
+        return 1
+    memo[n] = n * factorialMemo(n-1)
+    return memo[n]
+
+
+def factorial(x):
+    if x == 0:
+        return 1
+    return factorial(x-1) * x
+
+
+def binomanial(i, j):
+    return (factorialMemo(i) // (factorialMemo(j)*factorialMemo(i-j)))
+
+
+def print_triangle(triangle):
+    """
+    Print the triangle
+    """
+    for row in triangle:
+        print("[{}]".format(",".join([str(x) for x in row])))
+
+
+if __name__ == "__main__":
+    start = time.time()
+    print_triangle(pascal_triangle(1000))
+    end = time.time()
+    print(end-start)
