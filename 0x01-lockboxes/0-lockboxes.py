@@ -1,4 +1,4 @@
-#!/usr/bin/pyhton3
+#!/usr/bin/python3
 def canUnlockAll(boxes):
     """A function that checks if all the boxes can be opened
 
@@ -6,7 +6,7 @@ def canUnlockAll(boxes):
         boxes (array of numbers):
 
     Returns:
-        boolean
+        boolean.
     """
     queue = [0]
     visited = [False] * len(boxes)
